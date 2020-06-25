@@ -8,6 +8,9 @@ public abstract class GameObject {
     protected float y;
     protected ID id;
     protected float velX, velY;        // x and y speed
+    protected float gravity = 0.5f;
+    protected boolean falling = true;
+    protected boolean jumping = false;
 
     public GameObject(float x, float y, ID id){
         this.x = x; 

@@ -12,63 +12,56 @@ public class Player extends GameObject {
     Handler handler;
     public static int X = 0;
     public static int Y = 0;
-    
+
+
     public Player(float x, float y, ID id, Handler handler){
         super(x, y, id);
         this.handler = handler;
-        /*velX = xSpeed;
-        velY = ySpeed;
-        //setX((50));*/
+ 
     }
         
     public Rectangle getBounds(){
-        return (new Rectangle((int)x, (int)y, 16, 16));
+        return (new Rectangle((int)x, (int)y, config.playerWidth, config.playerHeight));
     }
            
     public void tick(){
 
-        setVelX(5);
-        setVelY(5);
         x += velX;
         y += velY;
         X = (int) getX();
         Y = (int) getY();
-        
-        if(y <= 50 || y >= config.windowHeight - 55){
-            velY *= - 1;
-            y = Game.clamp((int) y, 50, config.windowHeight - 55);
+       
+
+        if(y <= 0 || y >= config.windowHeight - config.playerHeight - config.blockHeight){
+            velY *= -1;
+            y = (int) Game.clamp((int)y, 0, config.windowHeight -config.playerHeight - config.blockHeight);
         }
-        if(x <= 0 || x >= config.windowWidth - 32){
-            velX *= - 1;
-            x = Game.clamp((int) x, 0, config.windowWidth- 32);
+        if(x <= 0 || x >= config.windowWidth - config.playerWidth){
+            velX *= -1;
+            x = (int) Game.clamp((int) x, 0, config.windowWidth - config.playerWidth);
         }
-       // handler.addObject(new Tail(x, y, ID.Tail, Color.BLUE, 16, 16, 0.06f, handler));
-        //collision();
+        collision();
     }
 
-   /* private void collision(){
+    private void collision(){
         for (int i = 0; i < handler.object.size(); i++){
             GameObject tObject = handler.object.get(i);
 
-            if(tObject.getId() == ID.BasicEnemy || tObject.getId() == ID.fastEnemy || tObject.getId() == ID.bossBullets || tObject.getId() == ID.newEnemy){
+            if(tObject.getId() == ID.Block){
                 if(getBounds().intersects(tObject.getBounds())){
-                    HUD.HEALTH -= config.damage;
                     velX *= -1;
                     velY *= -1;
-                    if(HUD.HEALTH == 0){
-                        Game.gameState = Game.STATE.GameOver;
-                    }
                 }
             }
         }
-    }*/
+    }
 
 
     public void render(Graphics g){
         if(id == ID.Player){
             g.setColor(Color.BLUE);
         }
-        g.fillRect((int) x,(int) y, 16, 16);
+        g.fillRect((int) x,(int) y, config.playerWidth, config.playerHeight);
         g.setColor(Color.BLACK);
         
         /*Graphics2D g2d = (Graphics2D) g;

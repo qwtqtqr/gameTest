@@ -44,4 +44,11 @@ public class Handler {
     public void removeObject(GameObject object){
         this.object.remove(object);
     }
+
+    public void createLevel(){
+
+        for(int xx = 0; xx < config.windowWidth + 32; xx+= config.blockWidth){
+            addObject(new Block(xx, config.windowHeight -32, ID.Block, this));
+        }
+    }
 }

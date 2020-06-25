@@ -8,4 +8,10 @@ public class config {
     public static int player1YPos = 0;
     public static int player1XSpeed = 5;
     public static int player1YSpeed = 5;
+    public static int playerWidth = 32;
+    public static int playerHeight = 64;
+
+    public static int blockWidth = 32;
+    public static int blockHeight = 32;
+    
 }

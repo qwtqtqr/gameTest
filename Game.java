@@ -21,7 +21,8 @@ public class Game extends Canvas implements Runnable{
     private boolean running = false;
     Handler handler;
     GameObject object;
-    Spawner spawner;
+    Random r = new Random();
+
     
 
     public enum STATE{
@@ -33,18 +34,22 @@ public class Game extends Canvas implements Runnable{
     public static STATE gameState = STATE.Menu;
 
     public Game(){
+       
+        handler = new Handler();
         
         new Window(config.windowWidth, config.windowHeight, "GAME", this);
+        this.addKeyListener(new KeyInput(handler));
 
-       // handler.addObject(new Player(0, 0, 1, 1, ID.Player, handler));
+          //Player 
+        handler.addObject(new Player(0, 0, ID.Player, handler));
+ 
+          //Blocks
+        handler.createLevel();
+
         
     }
 
-    private void init(){
-        handler = new Handler();
-
-        handler.addObject(new Player(0, 0, ID.Player, handler));
-    }
+  
 
     public synchronized void start(){
         thread = new Thread(this);
@@ -60,7 +65,6 @@ public class Game extends Canvas implements Runnable{
        }
     }
     public void run(){
-        init();
         this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
@@ -91,7 +95,6 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         handler.tick();
-        //spawner.tick();
     }
 
     private void render(){
