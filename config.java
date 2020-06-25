@@ -8,3 +8,4 @@ public class config {
     public static int player1YPos = 0;
     public static int player1XSpeed = 5;
     public static int player1YSpeed = 5;
+}
