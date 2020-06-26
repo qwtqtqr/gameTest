@@ -12,6 +12,7 @@ public class Player extends GameObject {
     Handler handler;
     public static int X = 0;
     public static int Y = 0;
+    private float gravity = 0.8f;
 
 
     public Player(float x, float y, ID id, Handler handler){
@@ -25,19 +26,25 @@ public class Player extends GameObject {
     }
            
     public void tick(){
-
+        //setFalling(true);
         x += velX;
         y += velY;
         X = (int) getX();
         Y = (int) getY();
+
+        if(falling || jumping){
+            velY += gravity;
+        }
        
 
         if(y <= 0 || y >= config.windowHeight - config.playerHeight - config.blockHeight){
-            velY *= -1;
+            if(y >= config.windowHeight - config.playerHeight - config.blockHeight){
+                velY = 0;
+            }
             y = (int) Game.clamp((int)y, 0, config.windowHeight -config.playerHeight - config.blockHeight);
         }
         if(x <= 0 || x >= config.windowWidth - config.playerWidth){
-            velX *= -1;
+            //velX *= -1;
             x = (int) Game.clamp((int) x, 0, config.windowWidth - config.playerWidth);
         }
         collision();
@@ -49,8 +56,12 @@ public class Player extends GameObject {
 
             if(tObject.getId() == ID.Block){
                 if(getBounds().intersects(tObject.getBounds())){
-                    velX *= -1;
-                    velY *= -1;
+                    velX = 0;
+                    velY = 0;
+                    y = (int) Game.clamp((int)y, 0,(int) tObject.getY() - config.playerHeight);
+
+                    jumping = false;
+                    falling = false;
                 }
             }
         }

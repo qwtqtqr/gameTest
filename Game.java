@@ -22,6 +22,7 @@ public class Game extends Canvas implements Runnable{
     Handler handler;
     GameObject object;
     Random r = new Random();
+    Edit edit;
 
     
 
@@ -29,22 +30,30 @@ public class Game extends Canvas implements Runnable{
         Menu,
         Game, 
         GameOver,
+        Edit,
+
     }
 
-    public static STATE gameState = STATE.Menu;
+    public static STATE gameState = STATE.Game;
 
     public Game(){
        
         handler = new Handler();
         
         new Window(config.windowWidth, config.windowHeight, "GAME", this);
+        edit = new Edit(this, handler);
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseListener(edit);
 
+        if(gameState == STATE.Game){
           //Player 
         handler.addObject(new Player(0, 0, ID.Player, handler));
  
           //Blocks
-        handler.createLevel();
+        //handler.createLevel();
+        handler.createLevel1();
+        }
+
 
         
     }
@@ -107,8 +116,12 @@ public class Game extends Canvas implements Runnable{
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, config.windowWidth, config.windowHeight);
+        //if(gameState == STATE.Game){
         handler.render(g);
-
+       
+        /*if(gameState == STATE.Edit){
+            edit.render(g);
+        }*/
         g.dispose();
         bs.show();
     }

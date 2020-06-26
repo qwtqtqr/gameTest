@@ -8,7 +8,6 @@ public abstract class GameObject {
     protected float y;
     protected ID id;
     protected float velX, velY;        // x and y speed
-    protected float gravity = 0.5f;
     protected boolean falling = true;
     protected boolean jumping = false;
 
@@ -52,5 +51,17 @@ public abstract class GameObject {
     }
     public ID getId(){
         return id;
+    }
+    public boolean isFalling(){
+        return falling;
+    }
+    public void setFalling(boolean falling){
+        this.falling = falling;
+    }
+    public boolean isJumping(){
+        return jumping;
+    }
+    public void setJumping(boolean jumping){
+        this.jumping = jumping;
     }
 }

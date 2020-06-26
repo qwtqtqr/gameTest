@@ -1,9 +1,21 @@
 import java.util.LinkedList;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Graphics2D;
+
+import java.io.File; 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import java.io.*; 
+import java.io.FileReader;
+
 
 public class Handler {
+
+    public static String count = "0";
 
     LinkedList<GameObject> object = new LinkedList<GameObject>();
 
@@ -48,7 +60,49 @@ public class Handler {
     public void createLevel(){
 
         for(int xx = 0; xx < config.windowWidth + 32; xx+= config.blockWidth){
-            addObject(new Block(xx, config.windowHeight -32, ID.Block, this));
+            addObject(new Block(xx, xx, ID.Block, this));
+        }
+    }
+
+    public int getCounter(){
+        try {
+            File myObj = new File("objectCount.txt");
+            Scanner myReader = new Scanner(myObj);
+            count = myReader.next();
+           // System.out.println(count);
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        int countNum = Integer.parseInt(count);
+        return countNum;
+    }
+
+    public void createLevel1(){
+
+
+        try {
+            File Obj = new File("level1.txt");
+            Scanner myReader = new Scanner(Obj);
+            while (myReader.hasNextLine()) {
+              String data = myReader.nextLine();
+             // System.out.println(data);
+              String xS = data.substring(0, data.indexOf(" ")).trim();
+              String yS = data.substring(data.indexOf(" ")).trim();
+              
+
+              int x = Integer.parseInt(xS);
+              int y = Integer.parseInt(yS);
+
+              for(int i = 0; i < getCounter(); i++){
+                  addObject(new Block(x, y, ID.Block, this));
+              }
+            }
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }
