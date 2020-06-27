@@ -22,7 +22,7 @@ public class Texture {
         try {
             block_sheet = loader.loadImage("/res/block_sheet.png");
             player_sheet = loader.loadImage("/res/player_sheet.png");
-            background = loader.loadImage("/background1080.png");
+            background = loader.loadImage("/res/background1080.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
