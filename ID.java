@@ -1,5 +1,6 @@
 public enum ID {
     Player(),
     Block(),
-    EditBlock();
+    EditBlock(),
+    BlockPos(),
 }

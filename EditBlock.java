@@ -12,7 +12,8 @@ public class EditBlock extends GameObject {
     Handler handler;
     public static int X = 0;
     public static int Y = 0;
-    
+    private Texture tex = Game.getInstance();
+
     public EditBlock(float x, float y, ID id, Handler handler){
         super(x, y, id);
         this.handler = handler;
@@ -33,8 +34,13 @@ public class EditBlock extends GameObject {
 
     public void render(Graphics g){
         if(Game.gameState == Game.STATE.Edit){
-        g.setColor(Color.getColor("brown", 5385483));
-        g.fillRect((int) x,(int) y, config.blockWidth, config.blockHeight);
+       /* g.setColor(Color.getColor("brown", 5385483));
+        g.fillRect((int) x,(int) y, config.blockWidth, config.blockHeight);*/
+
+        g.drawImage(tex.block[1], (int)x,(int)y, null);
+        g.drawImage(tex.block[1], (int)x + 32, (int)y, null);
+        g.drawImage(tex.block[1], (int)x + 64, (int)y, null);
+        g.drawImage(tex.block[1], (int)x + 96, (int)y, null);
         }
     }
     

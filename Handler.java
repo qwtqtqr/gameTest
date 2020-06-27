@@ -17,7 +17,14 @@ public class Handler {
 
     public static String count = "0";
 
+    public static int spawnCount = 0;
+    public static int X = 0;
+    public static int Y = 0;
+    public static int distance = config.windowWidth;
+ 
     LinkedList<GameObject> object = new LinkedList<GameObject>();
+
+
 
     public void tick(){
 
@@ -53,6 +60,9 @@ public class Handler {
         this.object.add(object);
     }
 
+
+
+
     public void removeObject(GameObject object){
         this.object.remove(object);
     }
@@ -60,7 +70,7 @@ public class Handler {
     public void createLevel(){
 
         for(int xx = 0; xx < config.windowWidth + 32; xx+= config.blockWidth){
-            addObject(new Block(xx, xx, ID.Block, this));
+            addObject(new Block(xx, config.windowHeight - config.blockHeight, 0, ID.Block, this));
         }
     }
 
@@ -87,7 +97,6 @@ public class Handler {
             Scanner myReader = new Scanner(Obj);
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine();
-             // System.out.println(data);
               String xS = data.substring(0, data.indexOf(" ")).trim();
               String yS = data.substring(data.indexOf(" ")).trim();
               
@@ -95,8 +104,11 @@ public class Handler {
               int x = Integer.parseInt(xS);
               int y = Integer.parseInt(yS);
 
+              X = x;
+              Y = y;
+
               for(int i = 0; i < getCounter(); i++){
-                  addObject(new Block(x, y, ID.Block, this));
+                  addObject(new Block(x, y, 1, ID.Block, this));
               }
             }
             myReader.close();

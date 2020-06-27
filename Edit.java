@@ -41,12 +41,24 @@ public class Edit extends MouseAdapter{
 
     public void mousePressed(MouseEvent d){
 
+      
+
        count++;
        mouseP = true;
        String countS = String.valueOf(count);
        
        int mx = d.getX();
        int my = d.getY();
+
+      /* if(mouseOver(mx, my, 25, 20, 100, 50)){
+           for(int i = 0; i < handler.object.size(); i++){
+               GameObject tempObject = handler.object.get(i);
+
+               if(tempObject.getId() == ID.EditBlock){
+                   handler.removeObject(tempObject);
+               }
+           }
+       }*/
 
        String mxS = String.valueOf(mx);
        String myS = String.valueOf(my);
@@ -73,6 +85,16 @@ public class Edit extends MouseAdapter{
         }
     
        handler.addObject(new EditBlock(objectX, objectY, ID.Player, handler));
+
+      /* if(mouseOver(mx, my, 25, 20, 100, 50)){
+           for(int i = 0; i < handler.object.size(); i++){
+               GameObject tempObject = handler.object.get(i);
+
+               if(tempObject.getId() == ID.EditBlock){
+                   handler.removeObject(tempObject);
+               }
+           }
+       }*/
 
     
     }
@@ -103,7 +125,8 @@ public class Edit extends MouseAdapter{
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, config.windowWidth, config.windowHeight);   // g.drawRect
         g.setColor(Color.LIGHT_GRAY);
-        g.drawString("Menu", config.windowWidth / 2 - 30, 50);
+       /* g.drawRect(25, 20, 100, 50);
+        g.drawString("next", 50, 50);*/
         
         fnt = new Font("arial", 1, 30);
         g.setColor(Color.WHITE);

@@ -4,6 +4,8 @@ public class config {
     public static int windowWidth = 1000;
     public static int windowHeight = windowWidth / 12 * 9;
 
+    public static Game.STATE gameState = Game.STATE.Game;
+
     public static int player1XPos = 1;
     public static int player1YPos = 1;
     public static int player1XSpeed = 5;
@@ -11,7 +13,7 @@ public class config {
     public static int playerWidth = 32;
     public static int playerHeight = 64;
 
-    public static int blockWidth = 80;
+    public static int blockWidth = 128;
     public static int blockHeight = 32;
     
 }

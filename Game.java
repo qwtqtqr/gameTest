@@ -11,6 +11,7 @@ import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
+import java.awt.image.*;
 
 
 public class Game extends Canvas implements Runnable{
@@ -23,6 +24,8 @@ public class Game extends Canvas implements Runnable{
     GameObject object;
     Random r = new Random();
     Edit edit;
+    Spawner spawner;
+    static Texture tex;
 
     
 
@@ -34,24 +37,27 @@ public class Game extends Canvas implements Runnable{
 
     }
 
-    public static STATE gameState = STATE.Game;
+    public static STATE gameState = config.gameState;
 
     public Game(){
        
         handler = new Handler();
-        
+        tex = new Texture();
         new Window(config.windowWidth, config.windowHeight, "GAME", this);
         edit = new Edit(this, handler);
         this.addKeyListener(new KeyInput(handler));
+        if(gameState == STATE.Edit){
         this.addMouseListener(edit);
+        }
+        spawner = new Spawner(handler);
 
         if(gameState == STATE.Game){
           //Player 
         handler.addObject(new Player(0, 0, ID.Player, handler));
  
           //Blocks
-        //handler.createLevel();
-        handler.createLevel1();
+       /* handler.createLevel();
+        handler.createLevel1();*/
         }
 
 
@@ -104,6 +110,9 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         handler.tick();
+        if(gameState == STATE.Game){
+        spawner.tick();
+        }
     }
 
     private void render(){
@@ -114,14 +123,17 @@ public class Game extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, config.windowWidth, config.windowHeight);
-        //if(gameState == STATE.Game){
+        /*g.setColor(Color.BLACK);
+        g.fillRect(0, 0, config.windowWidth, config.windowHeight);*/
+        g.drawImage(tex.backgroundImg[0], 0, 0, null);
         handler.render(g);
-       
-        /*if(gameState == STATE.Edit){
+
+
+       /* if(gameState == STATE.Edit){
             edit.render(g);
         }*/
+       
+        
         g.dispose();
         bs.show();
     }
@@ -137,6 +149,12 @@ public class Game extends Canvas implements Runnable{
             return var;
         }
     }
+
+
+    public static Texture getInstance(){
+        return tex;
+    }
+
     public static void main(String[] args) {
        new Game();
     }
