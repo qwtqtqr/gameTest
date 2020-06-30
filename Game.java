@@ -53,7 +53,7 @@ public class Game extends Canvas implements Runnable{
 
         if(gameState == STATE.Game){
           //Player 
-        handler.addObject(new Player(0, 0, ID.Player, handler));
+        handler.addObject(new Player(config.player1XPos, config.player1YPos, ID.Player, handler));
  
           //Blocks
        /* handler.createLevel();
@@ -123,9 +123,9 @@ public class Game extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
 
-        /*g.setColor(Color.BLACK);
-        g.fillRect(0, 0, config.windowWidth, config.windowHeight);*/
-        g.drawImage(tex.backgroundImg[0], 0, 0, null);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, config.windowWidth, config.windowHeight);
+       // g.drawImage(tex.backgroundImg[0], 0, 0, null);
         handler.render(g);
 
 

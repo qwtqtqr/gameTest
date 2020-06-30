@@ -6,6 +6,7 @@ public class Spawner {
     private int scoreKeep = 0;
     Random r = new Random();
     public static int tickNum = 0;
+    public static int xCount = 0;
 
     public static int refreshTick = 0;
 
@@ -17,6 +18,8 @@ public class Spawner {
     public void tick(){
      
     if(tickNum == 0){
+
+    
         
 
        // handler.addObject(new Player(0, 0, ID.Player, handler));
@@ -24,17 +27,9 @@ public class Spawner {
         
 
         // Pakour Objects
-       handler.createLevel();
-       handler.createLevel1();
+     handler.createLevel();
+     handler.createLevel1();
     }  
-
-        //handler.createLevel1Pos();    
-
-        if(refreshTick == 60){
-       // handler.refreshLevelPos();
-        refreshTick = 0;
-        }
-       // handler.createLevel1();
 
         tickNum++;
         refreshTick++;
