@@ -32,19 +32,13 @@ public class KeyInput extends KeyAdapter {
     
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        //System.out.println(key);
     
 
         int defaultSpeedXPlayer1 = config.player1XSpeed;
         int defaultSpeedYPlayer1 = config.player1YSpeed;
 
-        if(key == KeyEvent.VK_ESCAPE){
-            System.exit(1);
-        }
-       // int defaultSpeedXPlayer2 = config.player2XSpeed;
-       // int defaultSpeedYPlayer2 = config.player2YSpeed;
-
-        /*if(key == KeyEvent.VK_ESCAPE){    // esc
+       
+        if(key == KeyEvent.VK_ESCAPE){    // esc
             escapeCount++;
             if(escapeCount % 2 != 0){
                 Game.gameState = Game.STATE.Menu;
@@ -54,7 +48,7 @@ public class KeyInput extends KeyAdapter {
             }
 
             //escapeCount++;
-        }*/
+        }
 
 
         for(int i = 0; i < handler.object.size(); i++){
@@ -69,33 +63,27 @@ public class KeyInput extends KeyAdapter {
                     Player.tickCount__ = 0;
                     Player.jumpFromObject = true;
                 }
-               /* if(key == 87){   // W         if(key == KeyEvent.VK_W)
-                    {tempObject.setVelY(- defaultSpeedYPlayer1);
-                    tempObject.setVelX(0);  keyDown[0] = true;}
-                }
-                else if(key == 83){  // S
-                    {tempObject.setVelY(defaultSpeedYPlayer1);
-                    tempObject.setVelX(0); keyDown[1] = true;}
-                }*/
                 if(tempObject.getId() == ID.Block){
                 if(key == 65){  // A
+
+                    if(Player.movingA == true){
+                   
                     {tempObject.setVelX(defaultSpeedXPlayer1);
                     tempObject.setVelY(0); keyDown[2] = true;}
+                    }
+            
                 }
                 }
                 if(tempObject.getId() == ID.Block){
                 if(key == 68){  // D
-                   /* if (speed > 5){
-                        speed = 5;
-                    }*/
+                    if(Player.movingD == true){     
+                                      
                     {tempObject.setVelX(-defaultSpeedXPlayer1);
                     tempObject.setVelY(0); keyDown[3] = true;}
+                    }
                 }
                 }
                 }
-               /* else if(key == 27 && config.stopKey == true){  // esc
-                    game.gameState = Game.STATE.Menu;
-                }*/
             }
         }
     public void keyReleased(KeyEvent e){
@@ -113,15 +101,12 @@ public class KeyInput extends KeyAdapter {
 
                 
                 // key events for Player1
-                    if(key == 87){   // W         if(key == KeyEvent.VK_W)
-                        //tempObject.setVelY(0);
+                    if(key == 87){   // W       
                         keyDown[0] = false;
                     }
-                    //tempObject.setVelX(0);
         
                 
                     else if(key == 83){  // S
-                        //tempObject.setVelY(0);
                         keyDown[1] = false;
 
                     }

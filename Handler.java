@@ -20,9 +20,19 @@ public class Handler {
     public static int spawnCount = 0;
     public static int X = 0;
     public static int Y = 0;
-    public static int distance = config.windowWidth;
+    public static int distance = 100;
+    Block block;
  
     LinkedList<GameObject> object = new LinkedList<GameObject>();
+
+    LinkedList<Integer> objectPosX = new LinkedList<Integer>();
+    LinkedList<Integer> objectPosY = new LinkedList<Integer>();
+
+    LinkedList<Boolean> objectExists = new LinkedList<Boolean>();
+    LinkedList<Integer> objectCount = new LinkedList<Integer>();
+
+
+
 
 
 
@@ -32,6 +42,7 @@ public class Handler {
             GameObject tempObject = object.get(i);
             tempObject.tick();
         }
+
     }
     // renders all game objects
     public void render(Graphics g){
@@ -70,7 +81,7 @@ public class Handler {
     public void createLevel(){
 
         for(int xx = 0; xx < config.windowWidth + 32; xx+= config.blockWidth){
-            addObject(new Block(xx, config.windowHeight - config.blockHeight, 0, ID.Block, this));
+            addObject(new Block(xx, config.windowHeight - config.blockHeight, 0, 1, ID.Block, this));
         }
     }
 
@@ -89,7 +100,7 @@ public class Handler {
         return countNum;
     }
 
-    public void createLevel1(){
+    public void createLevel1Pos(){
 
 
         try {
@@ -104,11 +115,17 @@ public class Handler {
               int x = Integer.parseInt(xS);
               int y = Integer.parseInt(yS);
 
+              
+
               X = x;
               Y = y;
 
               for(int i = 0; i < getCounter(); i++){
-                  addObject(new Block(x, y, 1, ID.Block, this));
+                  /*objectPosX.add(x);
+                  objectPosY.add(y);
+                  objectCount.add(i);
+                  objectExists.add(false);*/
+                  addObject(new Block(x, y, 1, i, ID.Block, this));
               }
             }
             myReader.close();
@@ -117,4 +134,29 @@ public class Handler {
             e.printStackTrace();
         }
     }
+
+   /* public void createLevel1Objects(){
+
+        createLevel1Pos();
+
+        for(int i = 0; i < objectPosX.size(); i++){
+            int x = objectPosX.get(i);
+            int y = objectPosY.get(i);
+
+            boolean objectExists_ = objectExists.get(i);
+
+            int distanceX = x - Player.X;
+
+            if(distanceX < distance && distanceX > -distance && objectExists_ == false){
+                addObject(new Block(x, y, 1, i, ID.Block, this));
+
+                objectExists.add(i, true);
+
+            }
+
+            else if(distanceX > distance || distanceX < - distanceX){
+                objectExists.add(i, false);
+            }
+        }
+    }*/
 }

@@ -1,5 +1,6 @@
 import java.util.Random;
 
+
 public class Spawner {
     
     private Handler handler;
@@ -19,18 +20,12 @@ public class Spawner {
      
     if(tickNum == 0){
 
-    
-        
+        handler.createLevel1Pos();
 
-       // handler.addObject(new Player(0, 0, ID.Player, handler));
-
-        
-
-        // Pakour Objects
-     handler.createLevel();
-     handler.createLevel1();
-    }  
-
+        if(Game.gameState == Game.STATE.Game){
+            handler.addObject(new Player(config.player1XPos, config.player1YPos, ID.Player, handler));
+        }
+    }
         tickNum++;
         refreshTick++;
 

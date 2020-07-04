@@ -26,6 +26,7 @@ public class Game extends Canvas implements Runnable{
     Edit edit;
     Spawner spawner;
     static Texture tex;
+    private Menu menu = new Menu(this, handler);
 
     
 
@@ -37,7 +38,7 @@ public class Game extends Canvas implements Runnable{
 
     }
 
-    public static STATE gameState = config.gameState;
+    public static STATE gameState = STATE.Edit;
 
     public Game(){
        
@@ -46,21 +47,13 @@ public class Game extends Canvas implements Runnable{
         new Window(config.windowWidth, config.windowHeight, "GAME", this);
         edit = new Edit(this, handler);
         this.addKeyListener(new KeyInput(handler));
+        if(gameState == STATE.Menu){
+            this.addMouseListener(menu);
+        }
         if(gameState == STATE.Edit){
         this.addMouseListener(edit);
         }
         spawner = new Spawner(handler);
-
-        if(gameState == STATE.Game){
-          //Player 
-        handler.addObject(new Player(config.player1XPos, config.player1YPos, ID.Player, handler));
- 
-          //Blocks
-       /* handler.createLevel();
-        handler.createLevel1();*/
-        }
-
-
         
     }
 
@@ -113,6 +106,9 @@ public class Game extends Canvas implements Runnable{
         if(gameState == STATE.Game){
         spawner.tick();
         }
+        if(gameState == STATE.Menu){
+            menu.tick();
+        }
     }
 
     private void render(){
@@ -123,15 +119,23 @@ public class Game extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
 
+        if(gameState == STATE.Game){
+
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, config.windowWidth, config.windowHeight);
        // g.drawImage(tex.backgroundImg[0], 0, 0, null);
+        }
         handler.render(g);
+        
+
+        if(gameState == STATE.Menu){
+            menu.render(g);
+        }
 
 
-       /* if(gameState == STATE.Edit){
-            edit.render(g);
-        }*/
+       if(gameState == STATE.Edit){
+           edit.render(g);
+       }
        
         
         g.dispose();

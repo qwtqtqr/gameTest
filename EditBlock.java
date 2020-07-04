@@ -38,9 +38,7 @@ public class EditBlock extends GameObject {
         g.fillRect((int) x,(int) y, config.blockWidth, config.blockHeight);*/
 
         g.drawImage(tex.block[1], (int)x,(int)y, null);
-        g.drawImage(tex.block[1], (int)x + 32, (int)y, null);
-        g.drawImage(tex.block[1], (int)x + 64, (int)y, null);
-        g.drawImage(tex.block[1], (int)x + 96, (int)y, null);
+        
         }
     }
     

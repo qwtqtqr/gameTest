@@ -22,7 +22,7 @@ public class Texture {
         try {
             block_sheet = loader.loadImage("/res/block_sheet.png");
             player_sheet = loader.loadImage("/res/player_sheet.png");
-            background = loader.loadImage("/background1080.png");
+           // background = loader.loadImage("/background1080.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class Texture {
         block[0] = bs.grabImage(1, 1, 32, 32); // dirt block
         block[1] = bs.grabImage(2, 1, 32, 32); // grass block
 
-        backgroundImg[0] = backS.grabImage(1, 1, 1920 , 1080); // background
+      //  backgroundImg[0] = backS.grabImage(1, 1, 1920 , 1080); // background
 
         Player[0] = ps.grabImage(1, 1, 32, 64);
 
